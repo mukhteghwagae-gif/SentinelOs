@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SentinelOS</string>
+    <string name="app_description">Environmental Monitoring and Threat Detection System</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_scan">Scan</string>
+    <string name="tab_guard">Guard</string>
+    <string name="tab_broadcast">Broadcast</string>
+
+    <!-- Scan Mode -->
+    <string name="scan_title">MagnetoMap Scanning</string>
+    <string name="scan_start">Start Scan</string>
+    <string name="scan_stop">Stop Scan</string>
+    <string name="scan_status">Scanning Status</string>
+    <string name="magnetic_field_strength">Magnetic Field Strength</string>
+    <string name="anomaly_detected">Anomaly Detected</string>
+
+    <!-- Guard Mode -->
+    <string name="guard_title">Night Guard Mode</string>
+    <string name="guard_active">Guard Active</string>
+    <string name="guard_inactive">Guard Inactive</string>
+    <string name="threat_level">Threat Level</string>
+    <string name="threat_score">Threat Score</string>
+
+    <!-- Broadcast Mode -->
+    <string name="broadcast_title">EchoNet Mesh</string>
+    <string name="nearby_nodes">Nearby Nodes</string>
+    <string name="broadcast_message">Broadcast Message</string>
+    <string name="send_message">Send</string>
+
+    <!-- Common -->
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+
+    <!-- Permissions -->
+    <string name="permission_rationale">SentinelOS requires sensor permissions to function properly</string>
+</resources>

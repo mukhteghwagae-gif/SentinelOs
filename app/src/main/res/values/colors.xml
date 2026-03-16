@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="primary">#1F88E5</color>
+    <color name="primary_dark">#0D47A1</color>
+    <color name="accent">#00BCD4</color>
+
+    <!-- Background Colors (Dark AMOLED optimized) -->
+    <color name="background">#000000</color>
+    <color name="surface">#0A0E27</color>
+    <color name="surface_variant">#1A1F3A</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0BEC5</color>
+    <color name="text_tertiary">#78909C</color>
+
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FF9800</color>
+    <color name="error">#F44336</color>
+    <color name="info">#2196F3</color>
+
+    <!-- Sensor Visualization -->
+    <color name="magnetic_field_low">#1976D2</color>
+    <color name="magnetic_field_medium">#FFA726</color>
+    <color name="magnetic_field_high">#EF5350</color>
+
+    <!-- Threat Levels -->
+    <color name="threat_low">#4CAF50</color>
+    <color name="threat_medium">#FFC107</color>
+    <color name="threat_high">#FF5722</color>
+    <color name="threat_critical">#D32F2F</color>
+
+    <!-- UI Elements -->
+    <color name="border">#1E1E1E</color>
+    <color name="divider">#2C2C2C</color>
+    <color name="disabled">#424242</color>
+</resources>

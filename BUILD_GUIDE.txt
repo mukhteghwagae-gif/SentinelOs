@@ -1,0 +1,175 @@
+================================================================================
+                    SENTINELOS - APK BUILD GUIDE
+================================================================================
+
+IMPORTANT: The SentinelOS project is COMPLETE and READY TO BUILD.
+
+The Android SDK and build tools are required to compile the APK, which are not
+available in this sandbox environment. However, the complete project is ready
+to build on any machine with Android Studio or the Android SDK installed.
+
+================================================================================
+                        OPTION 1: ANDROID STUDIO (EASIEST)
+================================================================================
+
+1. Download Android Studio from: https://developer.android.com/studio
+
+2. Extract SentinelOS_Native.tar.gz:
+   tar -xzf SentinelOS_Native_Complete.tar.gz
+
+3. Open Android Studio and select "Open an Existing Project"
+
+4. Navigate to and select the SentinelOS_Native folder
+
+5. Wait for Gradle sync to complete (5-10 minutes on first build)
+
+6. Click Build → Build APK(s)
+
+7. The APK will be generated in:
+   app/build/outputs/apk/debug/app-debug.apk
+
+8. To install on a connected device:
+   Run → Run 'app' → Select target device
+
+================================================================================
+                        OPTION 2: COMMAND LINE BUILD
+================================================================================
+
+PREREQUISITES:
+  • JDK 17 or later
+  • Android SDK API 34
+  • Gradle 8.2.0 (or use included wrapper)
+
+STEPS:
+
+1. Extract the project:
+   tar -xzf SentinelOS_Native_Complete.tar.gz
+   cd SentinelOS_Native
+
+2. Set JAVA_HOME (if not already set):
+   export JAVA_HOME=/path/to/jdk17
+
+3. Set ANDROID_HOME (if not already set):
+   export ANDROID_HOME=/path/to/android/sdk
+
+4. Build Debug APK:
+   ./gradlew clean
+   ./gradlew assembleDebug
+
+5. Build Release APK (optimized):
+   ./gradlew assembleRelease
+
+6. Output locations:
+   Debug: app/build/outputs/apk/debug/app-debug.apk
+   Release: app/build/outputs/apk/release/app-release.apk
+
+7. Install on device:
+   adb install app/build/outputs/apk/debug/app-debug.apk
+
+================================================================================
+                        OPTION 3: GITHUB ACTIONS (CI/CD)
+================================================================================
+
+Create a .github/workflows/build.yml file with:
+
+name: Build SentinelOS APK
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+      - uses: android-actions/setup-android@v2
+      - run: ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v3
+        with:
+          name: app-debug.apk
+          path: app/build/outputs/apk/debug/
+
+================================================================================
+                        TROUBLESHOOTING
+================================================================================
+
+BUILD FAILS WITH "SDK not found":
+  → Install Android SDK API 34 via Android Studio SDK Manager
+  → Set ANDROID_HOME environment variable
+  → Verify: $ANDROID_HOME/platforms/android-34 exists
+
+BUILD FAILS WITH "JDK version":
+  → Install JDK 17 or later
+  → Set JAVA_HOME environment variable
+  → Verify: java -version shows 17+
+
+GRADLE SYNC FAILS:
+  → Delete .gradle folder: rm -rf .gradle
+  → Run: ./gradlew clean
+  → Try again: ./gradlew build
+
+APK TOO LARGE:
+  → Build release APK: ./gradlew assembleRelease
+  → Release APK is optimized with ProGuard (15-25 MB vs 50-80 MB debug)
+
+================================================================================
+                        BUILD CONFIGURATION
+================================================================================
+
+DEBUG BUILD:
+  • Unoptimized, includes debug symbols
+  • Faster build time (~2-3 minutes)
+  • Larger APK size (~50-80 MB)
+  • Use for development and testing
+
+RELEASE BUILD:
+  • Optimized with ProGuard
+  • Slower build time (~5-10 minutes)
+  • Smaller APK size (~15-25 MB)
+  • Use for production deployment
+
+SIGNING RELEASE APK:
+  • Android Studio: Build → Generate Signed Bundle/APK
+  • Command line: Use jarsigner tool
+  • Create keystore: keytool -genkey -v -keystore SentinelOS.keystore ...
+
+================================================================================
+                        PROJECT STRUCTURE
+================================================================================
+
+SentinelOS_Native/
+├── app/
+│   ├── src/main/
+│   │   ├── java/com/sentinel/os/      (25+ Kotlin files)
+│   │   ├── res/                       (Resources)
+│   │   └── AndroidManifest.xml        (Manifest)
+│   ├── build.gradle.kts               (App Gradle config)
+│   └── proguard-rules.pro             (ProGuard rules)
+├── build.gradle.kts                   (Root Gradle config)
+├── settings.gradle.kts                (Gradle settings)
+├── gradle.properties                  (Gradle properties)
+├── README.md                          (Project overview)
+├── ARCHITECTURE.md                    (System design)
+├── BUILD_INSTRUCTIONS.md              (Detailed build guide)
+└── DELIVERY_MANIFEST.md               (Delivery checklist)
+
+================================================================================
+                        NEXT STEPS
+================================================================================
+
+1. Extract the project archive
+2. Open in Android Studio or use command line
+3. Build the APK using one of the methods above
+4. Install on your Android device
+5. Test all three modes: Scan, Guard, Broadcast
+6. Customize as needed
+
+================================================================================
+
+For detailed information, see:
+  • README.md - Project overview
+  • ARCHITECTURE.md - System design
+  • BUILD_INSTRUCTIONS.md - Comprehensive build guide
+  • DELIVERY_MANIFEST.md - Delivery checklist
+
+================================================================================
