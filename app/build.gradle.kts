@@ -111,8 +111,9 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
 
     // FFT & Signal Processing
-    implementation("com.github.psambit9791:jdsp:0.4.0")
-
+    implementation("com.github.psambit9791:jdsp:0.4.0") {
+    exclude(group = "org.apache.maven.surefire")
+}
     // OpenStreetMap (OSMDroid)
     implementation("org.osmdroid:osmdroid-android:6.1.16")
 
