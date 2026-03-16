@@ -53,9 +53,6 @@ android {
     packagingOptions {
         resources {
            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-           excludes += "/META-INF/DEPENDENCIES"
-           excludes += "/META-INF/LICENSE"
-           excludes += "/META-INF/NOTICE"
         }
     }
 }
@@ -115,7 +112,13 @@ dependencies {
 
     // FFT & Signal Processing
     implementation("com.github.psambit9791:jdsp:0.4.0") {
-    exclude(group = "org.apache.maven.surefire")
+      exclude(group = "org.apache.maven.surefire")
+      exclude(group = "org.junit.jupiter")
+      exclude(group = "org.junit.platform")
+      exclude(group = "junit")
+      exclude(group = "org.apache.pdfbox")
+      exclude(group = "org.apache.fontbox")
+    }
 }
     // OpenStreetMap (OSMDroid)
     implementation("org.osmdroid:osmdroid-android:6.1.16")
