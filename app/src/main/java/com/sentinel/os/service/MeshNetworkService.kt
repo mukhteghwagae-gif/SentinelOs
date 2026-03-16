@@ -13,6 +13,7 @@ import com.sentinel.os.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import timber.log.Timber
 
 /**

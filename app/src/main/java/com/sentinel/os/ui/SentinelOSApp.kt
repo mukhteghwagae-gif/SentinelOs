@@ -2,7 +2,7 @@ package com.sentinel.os.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Broadcast
+import androidx.compose.material.icons.filled.CellTower
 import androidx.compose.material.icons.filled.Radar
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material3.Icon
@@ -40,7 +40,7 @@ fun SentinelOSApp() {
                     onClick = { selectedTab = 1 }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Filled.Broadcast, contentDescription = "Broadcast") },
+                    icon = { Icon(Icons.Filled.CellTower, contentDescription = "Broadcast") },
                     label = { Text("Broadcast") },
                     selected = selectedTab == 2,
                     onClick = { selectedTab = 2 }

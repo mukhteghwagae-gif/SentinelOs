@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun GuardScreen(modifier: Modifier = Modifier) {
-    val context = LocalContext.current.applicationContext as Application
+    val context = LocalContext.current.applicationContext as android.app.Application
     val viewModel: GuardViewModel = viewModel(factory = GuardViewModelFactory(context))
 
     val isGuardActive by viewModel.isGuardActive.collectAsState()
@@ -105,7 +105,7 @@ fun GuardScreen(modifier: Modifier = Modifier) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 LinearProgressIndicator(
-                    progress = { threatScore / 100f },
+                    progress = threatScore / 100f,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(8.dp),
