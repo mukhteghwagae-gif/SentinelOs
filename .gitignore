@@ -1,0 +1,31 @@
+# Gradle
+.gradle/
+build/
+# gradle-wrapper.jar is intentionally NOT ignored.
+# GitHub Actions downloads it fresh each build.
+# If you generate it locally via `gradle wrapper`, you MAY commit it.
+
+# Android local config — never commit
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Signing
+*.jks
+*.keystore
+keystore.properties
+
+# Output artifacts
+*.apk
+*.aab
+app/build/
+
+# OS
+.DS_Store
+Thumbs.db
+*~
