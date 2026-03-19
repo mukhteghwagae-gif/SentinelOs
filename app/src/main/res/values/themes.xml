@@ -20,7 +20,7 @@
     </style>
 
     <!-- Overlay for dark ActionBar/Toolbar -->
-    <style name="ThemeOverlay.SentinelOS.Toolbar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+    <style name="ThemeOverlay.SentinelOS.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">@color/accent_cyan</item>
     </style>
 </resources>
