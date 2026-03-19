@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="88dp">
+
+        <!-- MAGNETIC FIELD CARD (id: card_magnetic) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_magnetic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="MAGNETIC FIELD" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_mag_field"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Waiting…" android:textColor="@color/text_primary"
+                    android:textSize="22sp" android:textStyle="bold"
+                    android:fontFamily="monospace" android:layout_marginTop="6dp"/>
+                <TextView android:id="@+id/tv_azimuth"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Azimuth: —" android:textColor="@color/text_secondary"
+                    android:textSize="13sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- MOTION CARD -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="MOTION" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_accel"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Stable" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace"
+                    android:layout_marginTop="6dp"/>
+                <TextView android:id="@+id/tv_gyro"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Gyro: —" android:textColor="@color/text_secondary"
+                    android:textSize="13sp" android:fontFamily="monospace"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ENVIRONMENT CARD -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="14dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="LIGHT" android:textColor="@color/accent_cyan" android:textSize="10sp"/>
+                    <TextView android:id="@+id/tv_light"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="—" android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="PROXIMITY" android:textColor="@color/accent_cyan" android:textSize="10sp"/>
+                    <TextView android:id="@+id/tv_proximity"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="—" android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CALIBRATION CARD -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="CALIBRATION" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_calib_status"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Not calibrated — tap to set baseline"
+                    android:textColor="@color/text_secondary" android:textSize="13sp"
+                    android:layout_marginTop="6dp"/>
+                <Button android:id="@+id/btn_calibrate"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Calibrate Now" android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/accent_cyan"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ALERTS CARD (id: card_alerts) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_alerts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="ALERTS" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_alert_count"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Alerts today: 0" android:textColor="@color/text_primary"
+                    android:textSize="15sp" android:layout_marginTop="6dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- QUICK NAV BUTTONS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+            <Button android:id="@+id/btn_go_sensors"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="Sensors"
+                android:backgroundTint="@color/bg_card"
+                android:textColor="@color/accent_cyan"
+                android:layout_marginEnd="6dp"/>
+            <Button android:id="@+id/btn_go_ble"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="BLE Scan"
+                android:backgroundTint="@color/bg_card"
+                android:textColor="@color/accent_cyan"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,79 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sentinel.os">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Sensor Permissions -->
+    <!-- =============================================
+         SENSOR & HARDWARE PERMISSIONS
+         ============================================= -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.BODY_SENSORS" />
-
-    <!-- Audio Permissions -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
-    <!-- Camera Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <!-- Network Permissions -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <!-- Bluetooth Permissions -->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-
-    <!-- Background Service Permissions -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
-
-    <!-- Storage Permissions -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- System Permissions -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <application
-        android:allowBackup="true"
-        android:icon="@android:drawable/ic_dialog_info"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.SentinelOS"
-        android:supportsRtl="true">
+    <!-- =============================================
+         BLUETOOTH PERMISSIONS (Legacy + Android 12+)
+         ============================================= -->
+    <uses-permission android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <!-- Android 12+ BLE permissions (REQUIRED or crash) -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"
+        tools:targetApi="s" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"
+        tools:targetApi="s" />
 
+    <!-- =============================================
+         NETWORK PERMISSIONS
+         ============================================= -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- =============================================
+         FOREGROUND SERVICE (Android 8+ required)
+         ============================================= -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- System alert (night guard overlay) -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Hardware features (not required to install) -->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+
+    <application
+        android:name=".SentinelApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SentinelOS"
+        android:hardwareAccelerated="true"
+        tools:targetApi="31">
+
+        <!-- MAIN ACTIVITY -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.SentinelOS">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Foreground Services -->
-        <service
-            android:name=".service.NightGuardService"
-            android:foregroundServiceType="microphone|camera|location"
-            android:exported="false" />
+        <!-- MAGNETOMETER / SENSOR DETAIL ACTIVITY -->
+        <activity
+            android:name=".ui.SensorDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.MainActivity" />
 
+        <!-- BLE SCAN ACTIVITY -->
+        <activity
+            android:name=".ui.BleScanActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.MainActivity" />
+
+        <!-- NIGHT GUARD ACTIVITY -->
+        <activity
+            android:name=".ui.NightGuardActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.MainActivity"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true" />
+
+        <!-- SENTINEL FOREGROUND SERVICE — MUST be declared or crash -->
         <service
-            android:name=".service.MeshNetworkService"
+            android:name=".services.SentinelService"
+            android:exported="false"
             android:foregroundServiceType="location"
-            android:exported="false" />
+            android:enabled="true" />
 
-        <!-- WorkManager -->
-        <provider
-            android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="${applicationId}.workmanager-init"
-            android:exported="false" />
+        <!-- NIGHT GUARD FOREGROUND SERVICE -->
+        <service
+            android:name=".services.NightGuardService"
+            android:exported="false"
+            android:foregroundServiceType="location"
+            android:enabled="true" />
+
+        <!-- BOOT RECEIVER -->
+        <receiver
+            android:name=".services.BootReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
     </application>
-
 </manifest>

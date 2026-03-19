@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="80dp">
+
+        <!-- NIGHT GUARD TOGGLE -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="16dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="NIGHT GUARD" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_guard_status"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Night Guard: Inactive" android:textColor="@color/text_secondary"
+                    android:textSize="16sp" android:layout_marginTop="6dp"/>
+                <TextView android:id="@+id/tv_night_alert_count"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Total alerts: 0" android:textColor="@color/text_secondary"
+                    android:textSize="13sp" android:layout_marginTop="2dp"/>
+
+                <Switch android:id="@+id/switch_night_guard"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Activate Night Guard"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="12dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- SENSITIVITY -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="16dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="MOTION SENSITIVITY" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_sensitivity_label"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Sensitivity: 1.5 m/s² — High"
+                    android:textColor="@color/text_primary" android:textSize="13sp"
+                    android:layout_marginTop="6dp"/>
+                <SeekBar android:id="@+id/seek_sensitivity"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progressTint="@color/accent_cyan"
+                    android:thumbTint="@color/accent_cyan"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="← High sensitivity (detects faint movements)      Low sensitivity →"
+                    android:textColor="@color/text_secondary" android:textSize="10sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- HOW IT WORKS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="16dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="HOW IT WORKS" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="1. Place phone on flat surface (door, shelf, table)\n2. Activate Night Guard\n3. Auto-calibrates in 3 seconds\n4. Any movement or magnetic field change triggers:\n   • Vibration alert\n   • Push notification\n   • Log entry\n\nSensor fusion: Accelerometer + Magnetometer"
+                    android:textColor="@color/text_secondary" android:textSize="13sp"
+                    android:layout_marginTop="8dp" android:lineSpacingExtra="3dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ALERT LOG -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="14dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="ALERT LOG"
+                        android:textColor="@color/accent_cyan" android:textSize="10sp" android:letterSpacing="0.15"/>
+                    <Button android:id="@+id/btn_clear_log"
+                        android:layout_width="wrap_content" android:layout_height="32dp"
+                        android:text="Clear" android:textSize="11sp"
+                        android:backgroundTint="@color/bg_card" android:paddingHorizontal="10dp"/>
+                </LinearLayout>
+                <TextView android:id="@+id/tv_alert_log"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="No alerts yet" android:textColor="@color/text_secondary"
+                    android:textSize="12sp" android:fontFamily="monospace"
+                    android:layout_marginTop="8dp" android:lineSpacingExtra="2dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

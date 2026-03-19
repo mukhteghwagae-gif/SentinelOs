@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="88dp">
+
+        <!-- LIVE CHART -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="10dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="MAGNETIC FIELD HISTORY" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_sensors"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- SENSOR AVAILABILITY -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="HARDWARE AVAILABILITY" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15" android:layout_marginBottom="8dp"/>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Magnetometer"
+                        android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                    <TextView android:id="@+id/tv_avail_mag"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Checking…"
+                        android:textColor="@color/text_primary" android:textSize="12sp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_marginTop="4dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Accelerometer"
+                        android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                    <TextView android:id="@+id/tv_avail_acc"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Checking…"
+                        android:textColor="@color/text_primary" android:textSize="12sp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_marginTop="4dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Gyroscope"
+                        android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                    <TextView android:id="@+id/tv_avail_gyro"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Checking…"
+                        android:textColor="@color/text_primary" android:textSize="12sp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_marginTop="4dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Proximity"
+                        android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                    <TextView android:id="@+id/tv_avail_prox"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Checking…"
+                        android:textColor="@color/text_primary" android:textSize="12sp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_marginTop="4dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Light"
+                        android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                    <TextView android:id="@+id/tv_avail_light"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:text="Checking…"
+                        android:textColor="@color/text_primary" android:textSize="12sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CALIBRATION -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="ANOMALY DETECTION" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_anomaly_threshold"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Baseline: — µT  |  Threshold: ±50 µT"
+                    android:textColor="@color/text_secondary" android:textSize="13sp"
+                    android:layout_marginTop="6dp"/>
+                <Button android:id="@+id/btn_calibrate_sensor"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Set Baseline Now" android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/accent_cyan"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- MAGNETOMETER -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="MAGNETOMETER (µT)" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_sensor_mag_x"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="X: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace" android:layout_marginTop="6dp"/>
+                <TextView android:id="@+id/tv_sensor_mag_y"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Y: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace"/>
+                <TextView android:id="@+id/tv_sensor_mag_z"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Z: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace"/>
+                <TextView android:id="@+id/tv_sensor_mag_total"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Magnitude: —" android:textColor="@color/accent_cyan"
+                    android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="4dp"/>
+                <ProgressBar android:id="@+id/pb_mag_strength"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent" android:layout_height="8dp"
+                    android:layout_marginTop="8dp" android:max="150"
+                    android:progress="0" android:progressTint="@color/accent_cyan"
+                    android:progressBackgroundTint="@color/bg_card"/>
+                <TextView android:id="@+id/tv_sensor_azimuth"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Azimuth: —" android:textColor="@color/text_secondary"
+                    android:textSize="13sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ACCELEROMETER -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="ACCELEROMETER (m/s²)" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_sensor_acc_x"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="X: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace" android:layout_marginTop="6dp"/>
+                <TextView android:id="@+id/tv_sensor_acc_y"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Y: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace"/>
+                <TextView android:id="@+id/tv_sensor_acc_z"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Z: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- GYROSCOPE -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="GYROSCOPE (rad/s)" android:textColor="@color/accent_cyan"
+                    android:textSize="10sp" android:letterSpacing="0.15"/>
+                <TextView android:id="@+id/tv_sensor_gyro_x"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="X: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace" android:layout_marginTop="6dp"/>
+                <TextView android:id="@+id/tv_sensor_gyro_y"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Y: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace"/>
+                <TextView android:id="@+id/tv_sensor_gyro_z"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Z: —" android:textColor="@color/text_primary"
+                    android:textSize="14sp" android:fontFamily="monospace"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ENVIRONMENT: PROXIMITY + LIGHT -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:padding="14dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="PROXIMITY" android:textColor="@color/accent_cyan" android:textSize="10sp"/>
+                    <TextView android:id="@+id/tv_sensor_prox"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="—" android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="LIGHT" android:textColor="@color/accent_cyan" android:textSize="10sp"/>
+                    <TextView android:id="@+id/tv_sensor_lux"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="—" android:textColor="@color/text_primary"
+                        android:textSize="16sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

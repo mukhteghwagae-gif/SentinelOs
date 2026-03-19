@@ -1,49 +1,23 @@
-# ProGuard rules for SentinelOS
+# SentinelOS ProGuard Rules
 
-# Keep all classes in com.sentinel.os package
--keep class com.sentinel.os.** { *; }
+# Keep all app classes
+-keep class com.sentinelos.app.** { *; }
 
-# Keep Room database classes
--keep class androidx.room.** { *; }
--keepclassmembers class * extends androidx.room.RoomDatabase { *; }
+# MPAndroidChart
+-keep class com.github.mikephil.charting.** { *; }
 
-# Keep Compose classes
--keep class androidx.compose.** { *; }
+# AndroidX / Material
+-keep class androidx.** { *; }
+-keep class com.google.android.material.** { *; }
 
-# Keep Coroutines
--keepclassmembers class kotlinx.coroutines.** { *; }
+# Keep sensor / BLE data classes
+-keepclassmembers class com.sentinelos.app.ble.BleDevice { *; }
+-keepclassmembers class com.sentinelos.app.sensors.MagnetometerManager { *; }
 
-# Keep TensorFlow Lite
--keep class org.tensorflow.** { *; }
+# Keep service, receiver classes intact
+-keep class * extends android.app.Service
+-keep class * extends android.content.BroadcastReceiver
 
-# Keep Timber logging
--keep class timber.log.** { *; }
-
-# Keep Gson
--keep class com.google.gson.** { *; }
-
-# Keep Kotlin metadata
--keepclassmembers class ** {
-    *** Companion;
-}
-
-# Keep data classes
--keepclassmembers class com.sentinel.os.data.database.** {
-    <init>(...);
-}
-
-# Remove logging in release builds
--assumenosideeffects class timber.log.Timber {
-    public static *** d(...);
-    public static *** v(...);
-    public static *** i(...);
-}
-
-# Optimization
--optimizationpasses 5
--dontusemixedcaseclassnames
--verbose
-
-# Remove unused code
--dontshrink
--dontoptimize
+# General Android rules
+-dontwarn okhttp3.**
+-dontwarn okio.**

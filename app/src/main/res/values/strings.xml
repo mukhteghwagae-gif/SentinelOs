@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SentinelOS</string>
-    <string name="app_description">Environmental Monitoring and Threat Detection System</string>
+    <string name="sentinel_tagline">Security Intelligence Platform</string>
 
-    <!-- Navigation Tabs -->
-    <string name="tab_scan">Scan</string>
-    <string name="tab_guard">Guard</string>
-    <string name="tab_broadcast">Broadcast</string>
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_sensors">Sensors</string>
+    <string name="nav_ble">BLE Scan</string>
+    <string name="nav_night_guard">Night Guard</string>
+    <string name="nav_log">Log</string>
 
-    <!-- Scan Mode -->
-    <string name="scan_title">MagnetoMap Scanning</string>
-    <string name="scan_start">Start Scan</string>
-    <string name="scan_stop">Stop Scan</string>
-    <string name="scan_status">Scanning Status</string>
-    <string name="magnetic_field_strength">Magnetic Field Strength</string>
-    <string name="anomaly_detected">Anomaly Detected</string>
+    <!-- Actions -->
+    <string name="action_calibrate">Calibrate</string>
+    <string name="action_start_scan">Start Scan</string>
+    <string name="action_stop_scan">Stop Scan</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_save">Save</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
 
-    <!-- Guard Mode -->
-    <string name="guard_title">Night Guard Mode</string>
-    <string name="guard_active">Guard Active</string>
-    <string name="guard_inactive">Guard Inactive</string>
-    <string name="threat_level">Threat Level</string>
-    <string name="threat_score">Threat Score</string>
+    <!-- Status -->
+    <string name="status_sentinel_active">✓ Sentinel Active</string>
+    <string name="status_sentinel_starting">Starting…</string>
+    <string name="status_night_guard_inactive">Night Guard: Inactive</string>
+    <string name="status_night_guard_active">🌙 Night Guard: ACTIVE</string>
+    <string name="status_calibrating">Calibrating…</string>
+    <string name="status_calibrated">Calibrated ✓</string>
+    <string name="status_not_calibrated">Not calibrated</string>
 
-    <!-- Broadcast Mode -->
-    <string name="broadcast_title">EchoNet Mesh</string>
-    <string name="nearby_nodes">Nearby Nodes</string>
-    <string name="broadcast_message">Broadcast Message</string>
-    <string name="send_message">Send</string>
+    <!-- Descriptions -->
+    <string name="perm_rationale">SentinelOS needs sensor, location, and Bluetooth permissions to detect anomalies.</string>
+    <string name="ble_not_available">Bluetooth LE not available on this device.</string>
+    <string name="ble_disabled">Bluetooth is disabled. Enable to scan.</string>
+    <string name="no_alerts_yet">No alerts yet.</string>
+    <string name="log_initialized">Log initialized — monitoring active.</string>
 
-    <!-- Common -->
-    <string name="loading">Loading...</string>
-    <string name="error">Error</string>
-    <string name="retry">Retry</string>
-    <string name="settings">Settings</string>
-    <string name="about">About</string>
-
-    <!-- Permissions -->
-    <string name="permission_rationale">SentinelOS requires sensor permissions to function properly</string>
+    <!-- Channels (used by notification builder) -->
+    <string name="channel_sentinel_name">Sentinel Monitoring</string>
+    <string name="channel_night_guard_name">Night Guard</string>
+    <string name="channel_alerts_name">Security Alerts</string>
 </resources>

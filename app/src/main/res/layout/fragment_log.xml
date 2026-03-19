@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark"
+    android:padding="12dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/bg_surface"
+        app:cardCornerRadius="12dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <requestFocus/>
+            </TextView>
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="EVENT LOG"
+                android:textColor="@color/accent_cyan" android:textSize="10sp" android:letterSpacing="0.15"/>
+            <TextView android:id="@+id/tv_event_count"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="0 events" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+            <Button android:id="@+id/btn_clear_log_main"
+                android:layout_width="wrap_content" android:layout_height="32dp"
+                android:text="Clear" android:textSize="11sp"
+                android:backgroundTint="@color/bg_card"
+                android:paddingHorizontal="10dp" android:layout_marginStart="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView android:id="@+id/scroll_log"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false">
+        <TextView android:id="@+id/tv_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Initializing..."
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:fontFamily="monospace"
+            android:lineSpacingExtra="3dp"
+            android:padding="12dp"
+            android:background="@color/bg_surface"/>
+    </ScrollView>
+
+</LinearLayout>
