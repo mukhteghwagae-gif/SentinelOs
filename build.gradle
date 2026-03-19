@@ -1,22 +1,9 @@
-// Top-level build file
-buildscript {
-    ext.kotlin_version = "1.9.10"
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
+// Root build.gradle — plugin declarations only (AGP 8.x modern style)
+// Repository declarations moved to settings.gradle → dependencyResolutionManagement
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }   // required for MPAndroidChart
-    }
+plugins {
+    id 'com.android.application' version '8.2.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.10' apply false
 }
 
 task clean(type: Delete) {

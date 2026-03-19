@@ -1,2 +1,23 @@
+// Modern Gradle 7+ / AGP 8.x settings file
+// Repositories are declared here via dependencyResolutionManagement
+// This replaces the deprecated allprojects { repositories {} } block in root build.gradle
+
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }   // MPAndroidChart
+    }
+}
+
 rootProject.name = "SentinelOS"
 include ':app'
