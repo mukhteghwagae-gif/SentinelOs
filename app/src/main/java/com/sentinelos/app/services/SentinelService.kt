@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.sentinelos.app.R
@@ -25,6 +26,13 @@ class SentinelService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        // FIX #5: Defensively ensure channels exist before any notification is built,
+        // in case Application.onCreate() was not called (e.g. process reuse edge case)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val nm = getSystemService(NotificationManager::class.java)
+            SentinelApp.ensureChannels(nm)
+        }
+
         magnetometerManager = MagnetometerManager(this)
         setupSensorCallbacks()
     }
@@ -32,7 +40,7 @@ class SentinelService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START -> startMonitoring()
-            ACTION_STOP -> stopSelf()
+            ACTION_STOP  -> stopSelf()
         }
         return START_STICKY
     }
@@ -70,6 +78,7 @@ class SentinelService : Service() {
             Intent(this, SentinelService::class.java).apply { action = ACTION_STOP },
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+        // FIX #5: Channel is guaranteed to exist (ensured in onCreate)
         return NotificationCompat.Builder(this, SentinelApp.CHANNEL_SENTINEL)
             .setContentTitle("SentinelOS")
             .setContentText(text)
@@ -94,6 +103,7 @@ class SentinelService : Service() {
         sendBroadcast(intent)
     }
 
+    // FIX #6: LocalBinder is already the correct type — MainActivity uses `is` check
     override fun onBind(intent: Intent): IBinder = binder
 
     override fun onDestroy() {
@@ -102,9 +112,9 @@ class SentinelService : Service() {
     }
 
     companion object {
-        const val ACTION_START = "ACTION_START_SENTINEL"
-        const val ACTION_STOP = "ACTION_STOP_SENTINEL"
-        const val BROADCAST_ANOMALY = "com.sentinelos.ANOMALY"
-        const val NOTIFICATION_ID = 1001
+        const val ACTION_START       = "ACTION_START_SENTINEL"
+        const val ACTION_STOP        = "ACTION_STOP_SENTINEL"
+        const val BROADCAST_ANOMALY  = "com.sentinelos.ANOMALY"
+        const val NOTIFICATION_ID    = 1001
     }
 }

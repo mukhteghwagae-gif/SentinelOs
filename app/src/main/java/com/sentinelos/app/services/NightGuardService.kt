@@ -9,13 +9,13 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
-import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.sentinelos.app.SentinelApp
 import com.sentinelos.app.ui.MainActivity
@@ -29,15 +29,12 @@ class NightGuardService : Service(), SensorEventListener {
     private var magneticSensor: Sensor? = null
     private var proximitySensor: Sensor? = null
 
-    // Baseline values for motion detection
     private var baselineAccel = FloatArray(3) { 0f }
     private var lastAccel = FloatArray(3) { 0f }
-    private var calibrationSamples = 0
     private var isCalibrated = false
 
-    // Night guard config
-    var motionSensitivity: Float = 1.5f   // m/s² delta to trigger
-    var magneticSensitivity: Float = 40f  // µT delta to trigger
+    var motionSensitivity: Float = 1.5f
+    var magneticSensitivity: Float = 40f
     private var baselineMagnetic: Float = 0f
     private var lastMagnetic: Float = 0f
 
@@ -49,6 +46,12 @@ class NightGuardService : Service(), SensorEventListener {
 
     override fun onCreate() {
         super.onCreate()
+        // FIX #5: Defensively ensure notification channels exist before startForeground()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val nm = getSystemService(NotificationManager::class.java)
+            SentinelApp.ensureChannels(nm)
+        }
+
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         magneticSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
@@ -67,9 +70,9 @@ class NightGuardService : Service(), SensorEventListener {
     }
 
     private fun startNightGuard() {
+        // Channel is guaranteed to exist after onCreate's defensive check
         startForeground(NOTIFICATION_ID, buildNotification("Night Guard: Calibrating..."))
         registerSensors()
-        // Auto-calibrate after 3 seconds of settling
         handler.postDelayed({
             calibrate()
             updateNotification("Night Guard ACTIVE | 0 alerts")
@@ -77,15 +80,9 @@ class NightGuardService : Service(), SensorEventListener {
     }
 
     private fun registerSensors() {
-        accelSensor?.let {
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
-        }
-        magneticSensor?.let {
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
-        }
-        proximitySensor?.let {
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
-        }
+        accelSensor?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL) }
+        magneticSensor?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL) }
+        proximitySensor?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL) }
     }
 
     private fun calibrate() {
@@ -99,12 +96,10 @@ class NightGuardService : Service(), SensorEventListener {
             Sensor.TYPE_ACCELEROMETER -> {
                 lastAccel = event.values.copyOf()
                 if (!isCalibrated) return
-
                 val dx = abs(event.values[0] - baselineAccel[0])
                 val dy = abs(event.values[1] - baselineAccel[1])
                 val dz = abs(event.values[2] - baselineAccel[2])
                 val delta = sqrt(dx * dx + dy * dy + dz * dz)
-
                 if (delta > motionSensitivity) {
                     triggerAlert("Motion detected", "Movement: ${"%.1f".format(delta)} m/s²")
                 }
@@ -130,18 +125,15 @@ class NightGuardService : Service(), SensorEventListener {
         lastAlertTime = now
         alertCount++
 
-        // Vibrate
         vibrate()
-        // Update notification
         updateNotification("🚨 ALERT: $title | Total: $alertCount")
-        // Send broadcast to UI
         sendBroadcast(Intent(BROADCAST_ALERT).apply {
             putExtra("title", title)
             putExtra("detail", detail)
             putExtra("count", alertCount)
             putExtra("timestamp", now)
         })
-        // High-priority notification
+        // FIX #5: Channel ensured in onCreate — safe to post alert notification
         val nm = getSystemService(NotificationManager::class.java)
         val alertNotif = NotificationCompat.Builder(this, SentinelApp.CHANNEL_ALERTS)
             .setContentTitle("🚨 SentinelOS Alert")
@@ -171,7 +163,7 @@ class NightGuardService : Service(), SensorEventListener {
                 }
             }
         } catch (e: Exception) {
-            // Ignore vibration failures
+            // Ignore vibration failures on devices that don't support it
         }
     }
 
@@ -212,10 +204,10 @@ class NightGuardService : Service(), SensorEventListener {
     }
 
     companion object {
-        const val ACTION_START = "ACTION_START_NIGHT_GUARD"
-        const val ACTION_STOP = "ACTION_STOP_NIGHT_GUARD"
-        const val BROADCAST_ALERT = "com.sentinelos.NIGHT_GUARD_ALERT"
-        const val NOTIFICATION_ID = 1002
+        const val ACTION_START          = "ACTION_START_NIGHT_GUARD"
+        const val ACTION_STOP           = "ACTION_STOP_NIGHT_GUARD"
+        const val BROADCAST_ALERT       = "com.sentinelos.NIGHT_GUARD_ALERT"
+        const val NOTIFICATION_ID       = 1002
         const val ALERT_NOTIFICATION_ID = 2000
     }
 }

@@ -7,6 +7,8 @@
          ============================================= -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- FIX #3: ACCESS_BACKGROUND_LOCATION declared here but requested separately
+         in stage 2, only after foreground location is granted -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -20,7 +22,6 @@
         android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
         android:maxSdkVersion="30" />
-    <!-- Android 12+ BLE permissions (REQUIRED or crash) -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
         android:usesPermissionFlags="neverForLocation"
         tools:targetApi="s" />
@@ -41,9 +42,12 @@
          ============================================= -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+
+    <!-- FIX #1: POST_NOTIFICATIONS declared here AND requested at runtime on API 33+ -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- System alert (night guard overlay) -->
+    <!-- FIX #2: SYSTEM_ALERT_WINDOW is declared here (allowed) but MUST NOT be
+         requested via requestPermissions(). Use Settings.canDrawOverlays() instead. -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -77,7 +81,7 @@
             </intent-filter>
         </activity>
 
-        <!-- MAGNETOMETER / SENSOR DETAIL ACTIVITY -->
+        <!-- SENSOR DETAIL ACTIVITY -->
         <activity
             android:name=".ui.SensorDetailActivity"
             android:exported="false"
@@ -97,7 +101,7 @@
             android:showWhenLocked="true"
             android:turnScreenOn="true" />
 
-        <!-- SENTINEL FOREGROUND SERVICE — MUST be declared or crash -->
+        <!-- SENTINEL FOREGROUND SERVICE -->
         <service
             android:name=".services.SentinelService"
             android:exported="false"
